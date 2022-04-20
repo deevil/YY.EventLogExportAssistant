@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>YY.EventLogExportAssistant</RootNamespace>
     <Version>1.0.0.48</Version>
     <PackageId>YY.EventLogExportAssistant.Core</PackageId>
@@ -27,7 +27,6 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-    <PackageReference Include="YY.EventLogReaderAssistant" Version="1.0.0.53" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +34,10 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\YY.EventLogReaderAssistant\YY.EventLogReaderAssistant\YY.EventLogReaderAssistant.csproj" />
   </ItemGroup>
 
 </Project>

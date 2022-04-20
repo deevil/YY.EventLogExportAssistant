@@ -93,57 +93,64 @@ namespace YY.EventLogExportAssistant.Database
             Users = context.Users.Where(e => e.InformationSystemId == _system.Id).ToList().AsReadOnly();
             WorkServers = context.WorkServers.Where(e => e.InformationSystemId == _system.Id).ToList().AsReadOnly();
 
-            ApplicationsDictionary = Applications.GroupBy(e => e.Name).ToDictionary(e => e.Key, e => e.ToList());
-            ComputersDictionary = Computers.GroupBy(e => e.Name).ToDictionary(e => e.Key, e => e.ToList());
-            EventsDictionary = Events.GroupBy(e => e.Name).ToDictionary(e => e.Key, e => e.ToList());
-            MetadataDictionary = Metadata.GroupBy(e => e.Name).ToDictionary(e => e.Key, e => e.ToList());
-            PrimaryPortsDictionary = PrimaryPorts.GroupBy(e => e.Name).ToDictionary(e => e.Key, e => e.ToList());
-            SecondaryPortsDictionary = SecondaryPorts.GroupBy(e => e.Name).ToDictionary(e => e.Key, e => e.ToList());
+            //++ Frog 07.07.2022
+            //Иногда бывает так, что в БД один регистр слов, а в строке поиска другой, из-за этого система не может найти нужный объект
+            //поэтому все словари делаем в верхнем регистре            
+            ApplicationsDictionary = Applications.GroupBy(e => e.Name).ToDictionary(e => e.Key.ToUpper(), e => e.ToList());
+            ComputersDictionary = Computers.GroupBy(e => e.Name).ToDictionary(e => e.Key.ToUpper(), e => e.ToList());
+            EventsDictionary = Events.GroupBy(e => e.Name).ToDictionary(e => e.Key.ToUpper(), e => e.ToList());
+            MetadataDictionary = Metadata.GroupBy(e => e.Name).ToDictionary(e => e.Key.ToUpper(), e => e.ToList());
+            PrimaryPortsDictionary = PrimaryPorts.GroupBy(e => e.Name).ToDictionary(e => e.Key.ToUpper(), e => e.ToList());
+            SecondaryPortsDictionary = SecondaryPorts.GroupBy(e => e.Name).ToDictionary(e => e.Key.ToUpper(), e => e.ToList());
             SeveritiesDictionary = Severities.GroupBy(e => e.Name).ToDictionary(e => e.Key, e => e.ToList());
             TransactionStatusesDictionary = TransactionStatuses.GroupBy(e => e.Name).ToDictionary(e => e.Key, e => e.ToList());
-            UsersDictionary = Users.GroupBy(e => e.Name).ToDictionary(e => e.Key, e => e.ToList());
-            WorkServersDictionary = WorkServers.GroupBy(e => e.Name).ToDictionary(e => e.Key, e => e.ToList());
+            UsersDictionary = Users.GroupBy(e => e.Name).ToDictionary(e => e.Key.ToUpper(), e => e.ToList());
+            WorkServersDictionary = WorkServers.GroupBy(e => e.Name).ToDictionary(e => e.Key.ToUpper(), e => e.ToList());
+            //-- Frog 07.07.2022
         }
-        
+
         #endregion
 
         #region Private Methods
 
+        //++ Frog 23.01.20222
+        //Иногда бывает так, что в БД один регистр слов, а в строке поиска другой, из-за этого ситсема не может найти нужный объект
+        //поэтому поиск по словарям делаем в верхнем регистре  
         private long? GetApplicationId(EventLogReaderAssistant.Models.Applications item)
         {
             if (item == null) return null;
 
-            return ApplicationsDictionary[item.Name.Truncate(500)].First().Id;
+            return ApplicationsDictionary[item.Name.Truncate(500).ToUpper()].First().Id;
         }
         private long? GetComputerId(EventLogReaderAssistant.Models.Computers item)
         {
             if (item == null) return null;
 
-            return ComputersDictionary[item.Name.Truncate(500)].First().Id;
+            return ComputersDictionary[item.Name.Truncate(500).ToUpper()].First().Id;
         }
         private long? GetEventId(EventLogReaderAssistant.Models.Events item)
         {
             if (item == null) return null;
 
-            return EventsDictionary[item.Name.Truncate(500)].First().Id;
+            return EventsDictionary[item.Name.Truncate(500).ToUpper()].First().Id;
         }
         private long? GetMetadataId(EventLogReaderAssistant.Models.Metadata item)
         {
             if (item == null) return null;
 
-            return MetadataDictionary[item.Name.Truncate(500)].First(e => e.Uuid == item.Uuid).Id;
+            return MetadataDictionary[item.Name.Truncate(500).ToUpper()].First(e => e.Uuid == item.Uuid).Id;
         }
         private long? GetPrimaryPortId(EventLogReaderAssistant.Models.PrimaryPorts item)
         {
             if (item == null) return null;
 
-            return PrimaryPortsDictionary[item.Name.Truncate(500)].First().Id;
+            return PrimaryPortsDictionary[item.Name.Truncate(500).ToUpper()].First().Id;
         }
         private long? GetSecondaryPortId(EventLogReaderAssistant.Models.SecondaryPorts item)
         {
             if (item == null) return null;
 
-            return SecondaryPortsDictionary[item.Name.Truncate(500)].First().Id;
+            return SecondaryPortsDictionary[item.Name.Truncate(500).ToUpper()].First().Id;
         }
         private long? GetSeverityId(EventLogReaderAssistant.Models.Severity item)
         {
@@ -156,16 +163,17 @@ namespace YY.EventLogExportAssistant.Database
         private long? GetUserId(EventLogReaderAssistant.Models.Users item)
         {
             if (item == null) return null;
-
-            return UsersDictionary[item.Name.Truncate(500)].First(e => e.Uuid == item.Uuid).Id;
+            
+            //return UsersDictionary[item.Uuid.ToString()].First(e => e.Uuid == item.Uuid).Id;
+            return UsersDictionary[item.Name.Truncate(500).ToUpper()].First(e => e.Uuid == item.Uuid).Id;
         }
         private long? GetWorkServerId(EventLogReaderAssistant.Models.WorkServers item)
         {
             if (item == null) return null;
 
-            return WorkServersDictionary[item.Name.Truncate(500)].First().Id;
+            return WorkServersDictionary[item.Name.Truncate(500).ToUpper()].First().Id;
         }
-
+        //-- Frog 07.07.2022
         #endregion
     }
 }
