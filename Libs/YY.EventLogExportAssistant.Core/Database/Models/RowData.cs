@@ -35,27 +35,38 @@ namespace YY.EventLogExportAssistant.Database.Models
         }
         public RowData(InformationSystemsBase system, EventLogReaderAssistant.Models.RowData sourceRow, ReferencesDataCache referencesCache)
         {
-            ApplicationId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.Applications>(sourceRow);
-            Comment = sourceRow.Comment;
-            ComputerId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.Computers>(sourceRow);
-            ConnectId = sourceRow.ConnectId;
-            Data = sourceRow.Data;
-            DataPresentation = sourceRow.DataPresentation;
-            DataUUID = sourceRow.DataUuid;
-            EventId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.Events>(sourceRow);
-            Id = sourceRow.RowId;
-            InformationSystemId = system.Id;
-            MetadataId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.Metadata>(sourceRow);
-            Period = sourceRow.Period;
-            PrimaryPortId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.PrimaryPorts>(sourceRow);
-            SecondaryPortId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.SecondaryPorts>(sourceRow);
-            Session = sourceRow.Session;
-            SeverityId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.Severity>(sourceRow);
-            TransactionDate = sourceRow.TransactionDate;
-            TransactionId = sourceRow.TransactionId;
-            TransactionStatusId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.TransactionStatus>(sourceRow);
-            UserId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.Users>(sourceRow);
-            WorkServerId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.WorkServers>(sourceRow);
+            //++Frog 07.04.2022
+            //Добавил исключение, чтобы нормально выводилась ошибка
+            try
+            {
+                ApplicationId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.Applications>(sourceRow);
+                Comment = sourceRow.Comment;
+                ComputerId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.Computers>(sourceRow);
+                ConnectId = sourceRow.ConnectId;
+                Data = sourceRow.Data;
+                DataPresentation = sourceRow.DataPresentation;
+                DataUUID = sourceRow.DataUuid;
+                EventId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.Events>(sourceRow);
+                Id = sourceRow.RowId;
+                InformationSystemId = system.Id;
+                MetadataId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.Metadata>(sourceRow);
+                Period = sourceRow.Period;
+                PrimaryPortId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.PrimaryPorts>(sourceRow);
+                SecondaryPortId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.SecondaryPorts>(sourceRow);
+                Session = sourceRow.Session;
+                SeverityId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.Severity>(sourceRow);
+                TransactionDate = sourceRow.TransactionDate;
+                TransactionId = sourceRow.TransactionId;
+                TransactionStatusId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.TransactionStatus>(sourceRow);
+                UserId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.Users>(sourceRow);
+                WorkServerId = referencesCache.GetReferenceDatabaseId<EventLogReaderAssistant.Models.WorkServers>(sourceRow);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ошибка при получении Id из словаря: " + ex);
+
+            }
+            //--Frog 07.04.2022
         }
 
         #endregion

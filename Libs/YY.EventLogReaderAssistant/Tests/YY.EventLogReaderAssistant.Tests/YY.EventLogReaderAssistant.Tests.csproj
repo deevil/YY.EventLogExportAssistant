@@ -1,0 +1,89 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+
+    <Version>1.0.0.2</Version>
+
+    <Description>Набор тестов для проекта</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="SampleData\LGFFullComparison\**" />
+    <EmbeddedResource Remove="SampleData\LGFFullComparison\**" />
+    <EntityDeploy Remove="SampleData\LGFFullComparison\**" />
+    <None Remove="SampleData\LGFFullComparison\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.113.7" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.collector" Version="3.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SampleData\LGFFormatEventLog\" />
+    <Folder Include="SampleData\LGFFormatSpecialCases\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\YY.EventLogReaderAssistant\YY.EventLogReaderAssistant.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SampleData\LGFFormatEventLogBrokenFile\1Cv8.lgf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SampleData\LGFFormatEventLogBrokenFile\20200412130000.lgp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SampleData\LGFFormatEventLogOnChanging\1Cv8.lgf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SampleData\LGFFormatEventLogOnChanging\20200412130000.lgp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SampleData\LGFFormatEventLogReadWithDelay\1Cv8.lgf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SampleData\LGFFormatEventLogReadWithDelay\20200412130000.lgp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SampleData\LGFFormatEventLog\1Cv8.lgf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SampleData\LGFFormatEventLog\20200412130000.lgp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SampleData\LGFFormatSpecialCases\1Cv8.lgf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SampleData\LGFFormatSpecialCases\20201217170000.lgp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SampleData\LGFFullComparison.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SampleData\SQLiteFormatEventLogReadWithDelay\1Cv8.lgd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SampleData\SQLiteFormatEventLog\1Cv8.lgd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SampleData\SQLiteFormatEventLog\1Cv8_ReadReferences_IfChanged_Test.lgd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

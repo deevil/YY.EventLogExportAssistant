@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Version>1.0.0.53</Version>
+    <Description>Library for reading 1C:Enterprise 8.x platform's event log files</Description>
+    <Copyright>Copyright (c) 2020 Permitin Yury</Copyright>
+    <PackageProjectUrl>https://github.com/YPermitin/YY.EventLogReaderAssistant</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/YPermitin/YY.EventLogReaderAssistant</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>GIT</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageIcon>icon.png</PackageIcon>
+    <Authors>Permitin Yuriy</Authors>
+    <Product>Event log's reader assistant</Product>
+    <PackageTags>event, log, 1C, enterprise</PackageTags>
+    <FileVersion>1.0.0.53</FileVersion>
+    <AssemblyVersion>1.0.0.53</AssemblyVersion>
+    <PackageVersion>1.0.0.53</PackageVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SQLite" Version="1.0.113.7" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Nuget\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="RegexPatterns.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RegexPatterns.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="RegexPatterns.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RegexPatterns.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

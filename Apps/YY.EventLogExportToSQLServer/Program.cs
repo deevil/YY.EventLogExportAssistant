@@ -23,6 +23,7 @@ namespace YY.EventLogExportToSQLServer
 
         static void Main()
         {
+            //Console.ReadLine();
             IConfiguration Configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .Build();
